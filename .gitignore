@@ -1,0 +1,9 @@
+# Block absolutely everything by default
+*
+
+# Allow folders so Git can look inside them
+!*/
+
+# Explicitly allow only Rust source files and the gitignore itself
+!*.rs
+!.gitignore
