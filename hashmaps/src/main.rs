@@ -80,4 +80,32 @@ fn main() {
     println!("Mode of the list is: {}", mode);
     
     // 2. Using a hash map and vectors, create a text interface to allow a user to add employee names to a department in a company; for example, “Add Sally to Engineering” or “Add Amir to Sales.” Then, let the user retrieve a list of all people in a department or all people in the company by department, sorted alphabetically.
+    use std::io::{self, Write};
+
+    // 1. Prompt the user
+    print!("Enter some input to add an employee to a department. Follow this format: \"Add <employee_name> to <department_name>\": ");
+    // Ensure the prompt prints immediately before waiting for input
+    io::stdout().flush().unwrap();
+
+    // 2. Create a mutable string buffer to hold the input
+    let mut input = String::new();
+
+    // 3. Read the line from standard input
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
+
+    // 4. Clean up the trailing newline (\n or \r\n)
+    let mut trimmed_input = input.trim();
+
+    println!("You entered: '{}'", trimmed_input);
+    let mut trimmed_input = trimmed_input.split_whitespace();
+    let employee = trimmed_input.nth(1);
+    println!("Employee: {employee:?}");
+    let department = trimmed_input.nth(1);
+    println!("Department: {department:?}");
+
+    let mut company: HashMap<Option<&str>, Option<&str>> = HashMap::new();
+    company.insert(employee, department);
+    println!("{company:?}");
 }
